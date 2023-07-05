@@ -6,7 +6,7 @@ defmodule ExArray.ArrayEnumTest do
   @test_array 0..9 |> Enum.to_list() |> Array.new()
 
   test "can count" do
-    assert Enum.count(Array.new()) == 0
+    assert Enum.empty?(Array.new())
     assert Enum.count(@test_array) == 10
   end
 

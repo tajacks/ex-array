@@ -46,8 +46,6 @@ defmodule ExArray.Array do
 
   # Add Operations #
 
-  # todo nil check on all insertions
-
   @doc """
   Adds the given element to the end of the Array
 
@@ -376,7 +374,7 @@ defmodule ExArray.Array do
   end
 
   # Ideally we could only shift the keys that are after the index we are adding to
-  # todo: make this more efficient (??)
+  # Look into when it becomes more efficient to shift vs. creating a new map
   defp shift_map_keys_after(map, index_after, mapping_fun) do
     Map.new(map, fn
       {k, v} when k < index_after -> {k, v}
