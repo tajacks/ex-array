@@ -46,8 +46,6 @@ defmodule ExArray.Array do
 
   # Add Operations #
 
-  # todo nil check on all insertions
-
   @doc """
   Adds the given element to the end of the Array
 
@@ -337,6 +335,7 @@ defmodule ExArray.Array do
   end
 
   # Adding to any spot but the end of the array, requires re-indexing
+  @spec add_element_at(t(), any(), integer()) :: t()
   defp add_element_at(arr, element, index) do
     shifted_contents = shift_map_keys_after(arr.contents, index, &increment_one/1)
     %__MODULE__{length: arr.length + 1, contents: Map.put(shifted_contents, index, element)}
@@ -350,6 +349,7 @@ defmodule ExArray.Array do
   end
 
   # Removing any element but the last element of the array, requires re-indexing
+  @spec remove_element_at(t(), integer()) :: t()
   defp remove_element_at(arr, index) do
     {_element, with_removed_element} = Map.pop!(arr.contents, index)
 
@@ -362,6 +362,8 @@ defmodule ExArray.Array do
   # Returns {:ok, result} if the index is within the bounds of the array, 
   # after evaluating the given operation function,
   # otherwise returns {:error, :out_of_bounds}
+  @spec index_safe_operation(t(), integer(), (integer() -> t())) ::
+          {:ok, t()} | {:error, :out_of_bounds}
   defp index_safe_operation(array, index, operation) do
     index = if index < 0, do: array.length + index, else: index
 
@@ -371,12 +373,14 @@ defmodule ExArray.Array do
     end
   end
 
+  @spec raise_out_of_bounds(integer(), integer()) :: no_return()
   defp raise_out_of_bounds(index, length) do
     raise(ArgumentError, "Index #{index} is out of bounds for length #{length}")
   end
 
   # Ideally we could only shift the keys that are after the index we are adding to
-  # todo: make this more efficient (??)
+  # Look into when it becomes more efficient to shift vs. creating a new map
+  @spec shift_map_keys_after(map, integer(), (integer() -> integer())) :: map()
   defp shift_map_keys_after(map, index_after, mapping_fun) do
     Map.new(map, fn
       {k, v} when k < index_after -> {k, v}

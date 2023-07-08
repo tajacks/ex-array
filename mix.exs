@@ -4,10 +4,14 @@ defmodule ExArray.MixProject do
   def project do
     [
       app: :ex_array,
+      description: "An array-like data structure for Elixir",
       version: "0.1.0",
+      source_url: "https://github.com/tajacks/ex_array",
+      homepage_url: "https://github.com/tajacks/ex_array",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      package: package(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -38,6 +42,14 @@ defmodule ExArray.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      name: "exarray",
+      licenses: ["LGPL-3.0-only"],
+      links: %{"GitHub" => "https://github.com/tajacks/ex_array"}
     ]
   end
 end
