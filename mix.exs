@@ -45,7 +45,6 @@ defmodule ExArray.MixProject do
     ]
   end
 
-
   defp package do
     [
       name: "exarray",
