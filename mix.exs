@@ -48,7 +48,7 @@ defmodule ExArray.MixProject do
 
   defp package do
     [
-      name: "ex_array",
+      name: "exarray",
       licenses: ["LGPL-3.0-only"],
       links: %{"GitHub" => "https://github.com/tajacks/ex_array"}
     ]
