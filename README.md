@@ -1,5 +1,9 @@
 # ExArray
 
+[![Coverage Status](https://coveralls.io/repos/github/tajacks/ex-array/badge.svg?branch=main)](https://coveralls.io/github/tajacks/ex-array?branch=main)
+
+[![Build and Test](https://github.com/tajacks/ex-array/actions/workflows/elixir-build-and-test.yml/badge.svg)](https://github.com/tajacks/ex-array/actions/workflows/elixir-build-and-test.yml)
+
 `ExArray.Array` is a module that provides Array-ish functionality to Elixir.
 
 The `ExArray.Array` structure is useful when fast random access, by index, is needed. It can be dynamically grown 
