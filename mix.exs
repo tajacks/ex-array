@@ -37,11 +37,11 @@ defmodule ExArray.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.30.6", only: :dev, runtime: false},
       {:benchee, "~> 1.0", only: :dev},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test},
-      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false}
+      {:excoveralls, "~> 0.17.1", only: :test},
+      {:dialyxir, "~> 1.4.1", only: [:dev, :test], runtime: false}
     ]
   end
 
