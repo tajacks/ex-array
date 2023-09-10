@@ -3,9 +3,9 @@ defmodule ExArray.MixProject do
 
   def project do
     [
-      app: :ex_array,
+      app: :exarray,
       description: "An array-like data structure for Elixir",
-      version: "0.1.0",
+      version: "0.1.1",
       source_url: "https://github.com/tajacks/ex_array",
       homepage_url: "https://github.com/tajacks/ex_array",
       elixir: "~> 1.14",
