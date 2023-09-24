@@ -17,6 +17,9 @@ method being called. In the example with 5 elements, the index `-6` will result 
 before the first element. When a positive index is passed, the index is treated as an offset from the beginning and 
 the appropriate failure condition will occur if the index runs over the end of the structure.
 
+Full documentation can be found at <https://hexdocs.pm/exarray>.
+
+
 ## Construction
 
 `ExArray.Array` can be constructed in a number of ways. The most common is to use the `new/0` 
@@ -155,14 +158,11 @@ by adding `ex_array` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:exarray, "~> 0.1.0"}
+    {:exarray, "~> 0.1.2"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/exarray>.
 
 ## Acknowledgements
 
