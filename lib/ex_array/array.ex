@@ -362,8 +362,8 @@ defmodule ExArray.Array do
   # Returns {:ok, result} if the index is within the bounds of the array, 
   # after evaluating the given operation function,
   # otherwise returns {:error, :out_of_bounds}
-  @spec index_safe_operation(t(), integer(), (integer() -> t())) ::
-          {:ok, t()} | {:error, :out_of_bounds}
+  @spec index_safe_operation(t(), integer(), (integer() -> any())) ::
+          {:ok, any()} | {:error, :out_of_bounds}
   defp index_safe_operation(array, index, operation) do
     index = if index < 0, do: array.length + index, else: index
 
