@@ -26,3 +26,5 @@ ex_array-*.tar
 /tmp/
 
 priv/plts
+
+.idea
