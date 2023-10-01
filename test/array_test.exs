@@ -118,6 +118,40 @@ defmodule ExArray.ArrayTest do
     end
   end
 
+  test "can set elements in array" do
+    assert {:ok, %Array{length: 3, contents: %{0 => "1", 1 => "2", 2 => "4"}}} =
+             Array.set(@test_array, 2, "4")
+
+    assert {:ok, %Array{length: 3, contents: %{0 => "1", 1 => "4", 2 => "3"}}} =
+             Array.set(@test_array, 1, "4")
+
+    assert {:ok, %Array{length: 3, contents: %{0 => "4", 1 => "2", 2 => "3"}}} =
+             Array.set(@test_array, 0, "4")
+
+    assert %Array{length: 3, contents: %{0 => "1", 1 => "2", 2 => "4"}} =
+             Array.set!(@test_array, 2, "4")
+
+    assert %Array{length: 3, contents: %{0 => "1", 1 => "4", 2 => "3"}} =
+             Array.set!(@test_array, 1, "4")
+
+    assert %Array{length: 3, contents: %{0 => "4", 1 => "2", 2 => "3"}} =
+             Array.set!(@test_array, 0, "4")
+  end
+
+  test "setting elements outside of bounds is invalid" do
+    assert {:error, :out_of_bounds} = Array.set(@test_array, 3, "4")
+    assert {:error, :out_of_bounds} = Array.set(@test_array, -4, "4")
+    assert {:error, :out_of_bounds} = Array.set(Array.new(), 0, "4")
+
+    assert_raise ArgumentError, fn ->
+      Array.set!(@test_array, 3, "4")
+    end
+
+    assert_raise ArgumentError, fn ->
+      Array.set!(@test_array, -4, "4")
+    end
+  end
+
   test "can convert to list" do
     assert ["1", "2", "3"] == Array.to_list(@test_array)
   end

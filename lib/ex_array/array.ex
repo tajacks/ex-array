@@ -170,6 +170,54 @@ defmodule ExArray.Array do
     end
   end
 
+  @doc """
+  Sets the element at the given index to the given element. 
+
+  If the given index is negative, it will be evaluated as an offset from the end of the Array.
+  The element must exist and the index must be in bounds, otherwise returns `{:error, :out_of_bounds}`
+
+  ## Examples
+
+    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(1, 4)
+    {:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}}
+
+    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(-1, 4)
+    {:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}}
+
+    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(4, 4)
+    {:error, :out_of_bounds}
+
+  """
+  def set(%__MODULE__{} = array, index, element) do
+    index_safe_operation(array, index, fn i -> replace_element_at(array, i, element) end)
+  end
+
+  @doc """
+  Sets the element at the given index to the given element.
+
+  If the given index is negative, it will be evaluated as an offset from the end of the Array.
+  The element must exist and the index must be in bounds, otherwise raises an `ArgumentError`
+
+  ## Examples
+
+    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(1, 4)
+    %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}
+
+    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(-1, 4)
+    %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}
+
+    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(4, 4)
+    ** (ArgumentError) Index 4 is out of bounds for length 3
+
+  """
+  @spec set!(t, integer(), any()) :: t
+  def set!(%__MODULE__{} = array, index, element) when is_integer(index) do
+    case set(array, index, element) do
+      {:ok, array} -> array
+      {:error, :out_of_bounds} -> raise_out_of_bounds(index, array.length)
+    end
+  end
+
   # Removal Operations #
 
   @doc """
@@ -357,6 +405,12 @@ defmodule ExArray.Array do
       length: arr.length - 1,
       contents: shift_map_keys_after(with_removed_element, index, &decrement_one/1)
     }
+  end
+
+  # Replacing an element doesn't change the length
+  @spec replace_element_at(t(), integer(), any()) :: t()
+  defp replace_element_at(arr, index, element) do
+    %__MODULE__{arr | contents: Map.put(arr.contents, index, element)}
   end
 
   # Returns {:ok, result} if the index is within the bounds of the array, 
