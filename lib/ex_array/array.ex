@@ -178,16 +178,16 @@ defmodule ExArray.Array do
 
   ## Examples
 
-    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(1, 4)
-    {:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}}
+      iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(1, 4)
+      {:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}}
 
-    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(-1, 4)
-    {:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}}
+      iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(-1, 4)
+      {:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}}
 
-    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(4, 4)
-    {:error, :out_of_bounds}
-
+      iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(4, 4)
+      {:error, :out_of_bounds}
   """
+  @spec set(t, integer(), any()) :: {:ok, t} | {:error, :out_of_bounds}
   def set(%__MODULE__{} = array, index, element) do
     index_safe_operation(array, index, fn i -> replace_element_at(array, i, element) end)
   end
@@ -200,14 +200,14 @@ defmodule ExArray.Array do
 
   ## Examples
 
-    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(1, 4)
-    %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}
+      iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(1, 4)
+      %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}
 
-    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(-1, 4)
-    %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}
+      iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(-1, 4)
+      %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}
 
-    iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(4, 4)
-    ** (ArgumentError) Index 4 is out of bounds for length 3
+      iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set!(4, 4)
+      ** (ArgumentError) Index 4 is out of bounds for length 3
 
   """
   @spec set!(t, integer(), any()) :: t
