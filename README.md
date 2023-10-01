@@ -118,6 +118,23 @@ iex> ExArray.Array.remove_at!(ExArray.Array.new([1, 2, 3]), 4)
 ** (ArgumentError) Index 4 is out of bounds for length 3
 ```
 
+## Replacing Elements 
+
+An element can be replaced at the given index without requiring re-indexing. Use `set/3` and its raising 
+counterpart for these operations.
+
+```elixir 
+
+iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(1, 4)
+{:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 4, 2 => 3}}}
+
+iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(-1, 4)
+{:ok, %ExArray.Array{length: 3, contents: %{0 => 1, 1 => 2, 2 => 4}}}
+
+iex> ExArray.Array.new([1, 2, 3]) |> ExArray.Array.set(4, 4)
+{:error, :out_of_bounds} 
+```
+
 ## Collectable Operations 
 
 `ExArray.Array` implements the `Collectable` protocol. This means that it can be used with `Enum.into` and `for` 
@@ -158,7 +175,7 @@ by adding `ex_array` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:exarray, "~> 0.1.2"}
+    {:exarray, "~> 0.2.0"}
   ]
 end
 ```
